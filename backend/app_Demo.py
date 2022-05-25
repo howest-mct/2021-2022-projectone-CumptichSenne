@@ -1,3 +1,4 @@
+from socket import socket
 import time
 from RPi import GPIO
 from helpers.klasseknop import Button
@@ -100,7 +101,7 @@ def all_out():
         print('*** We zetten alles uit **')
         DataRepository.update_status_alle_lampen(0)
         GPIO.output(ledPin, 0)
-        status = DataRepository.read_status_lampen()
+        status = DataRepository.read_history()
         socketio.emit('B2F_status_lampen', {'lampen': status})
         time.sleep(15)
 
@@ -108,7 +109,6 @@ def start_thread():
     print("**** Starting THREAD ****")
     thread = threading.Thread(target=all_out, args=(), daemon=True)
     thread.start()
-
 
 def start_chrome_kiosk():
     import os
