@@ -51,7 +51,7 @@ class DataRepository:
         return Database.get_rows(sql,params)
 
     @staticmethod
-    def create_temp(actiedatum, waarde, commentaar, deviceid, actieid, statusid):
+    def create_waarde(actiedatum, waarde, commentaar, deviceid, actieid, statusid):
         sql = "insert into Historiek(actiedatum, waarde, commentaar, deviceid, actieid, statusid) values (%s,%s,%s,%s,%s,%s);"
         params = [actiedatum, waarde,commentaar,deviceid,actieid,statusid]
         return Database.execute_sql(sql,params)

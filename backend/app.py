@@ -75,7 +75,8 @@ def all_out():
             status = 2
         else:
             status = 1
-        DataRepository.create_temp(dt_string,temp,"Gemeten temperatuur",1,3,status)
+        DataRepository.create_waarde(dt_string,temp,"Gemeten temperatuur",1,3,status)
+        DataRepository.create_waarde(dt_string,waarde,"Gemeten kwaliteit waarde",2,3,2)
         time.sleep(10)
 
 def start_thread():
