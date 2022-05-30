@@ -1,3 +1,4 @@
+from crypt import methods
 from datetime import datetime
 from RPi import GPIO
 from helpers.display import LCD
@@ -31,7 +32,6 @@ socketio = SocketIO(app, cors_allowed_origins="*", logger=False,
                     engineio_logger=False, ping_timeout=1)
 
 CORS(app)
-
 
 @socketio.on_error()        # Handles the default namespace
 def error_handler(e):
@@ -77,7 +77,7 @@ def all_out():
             status = 1
         DataRepository.create_waarde(dt_string,temp,"Gemeten temperatuur",1,3,status)
         DataRepository.create_waarde(dt_string,waarde,"Gemeten kwaliteit waarde",2,3,2)
-        time.sleep(10)
+        time.sleep(10) 
 
 def start_thread():
     print("**** Starting THREAD ****")
@@ -130,6 +130,7 @@ lcd.send_instruction(LCD_DisplayLegenTerugHome)
 
 
 if __name__ == '__main__':
+    app.run(debug=True) 
     try:
         setup_gpio()
         start_thread()
@@ -140,3 +141,16 @@ if __name__ == '__main__':
         print ('KeyboardInterrupt exception is caught')
     finally:
         GPIO.cleanup()
+
+endpoint = '/api/v1'
+
+# routes
+
+@app.route(endpoint + '/historiek/', methods=['GET'])
+def get_historiek():
+    if request.method == 'GET':
+        data = DataRepository.read_history()
+        if data is not None:
+            return jsonify(data), 200
+        else:
+            return jsonify(message="Error"), 404
