@@ -1,29 +1,30 @@
 const lanIP = `${window.location.hostname}:5000`;
-const socket = io(`http://${lanIP}`);
 
-const clearClassList = function (el) {
-  el.classList.remove("c-room--wait");
-  el.classList.remove("c-room--on");
-};
+// #region ***  DOM references                           ***********
+// #endregion
 
-const listenToUI = function () {
-  const knoppen = document.querySelectorAll(".js-power-btn");
-  for (const knop of knoppen) {
-    knop.addEventListener("click", function () {
-      const id = this.dataset.idlamp;
-      let nieuweStatus;
-      if (this.dataset.statuslamp == 0) {
-        nieuweStatus = 1;
-      } else {
-        nieuweStatus = 0;
-      }
-      //const statusOmgekeerd = !status;
-      clearClassList(document.querySelector(`.js-room[data-idlamp="${id}"]`));
-      document.querySelector(`.js-room[data-idlamp="${id}"]`).classList.add("c-room--wait");
-      socket.emit("F2B_switch_light", { lamp_id: id, new_status: nieuweStatus });
-    });
-  }
+// #region ***  Callback-Visualisation - show___         ***********
+
+const ShowHistoriek = function (jsonObject) {
+  //Toon menu
+  console.log(jsonObject);
 };
+// #endregion
+
+// #region ***  Callback-No Visualisation - callback___  ***********
+// #endregion
+
+// #region ***  Data Access - get___                     ***********
+
+const getHistoriek = function() {
+  handleData(
+    `http://${window.location.hostname}:5000/api/v1/historiek/`, ShowHistoriek
+  );
+}
+
+// #endregion
+
+// #region ***  Event Listeners - listenTo___            ***********
 
 const listenToSocket = function () {
   socket.on("connected", function () {
@@ -69,8 +70,12 @@ const listenToSocket = function () {
 
 };
 
+// #endregion
+
+// #region ***  Init / DOMContentLoaded                  ***********
+
 document.addEventListener("DOMContentLoaded", function () {
   console.info("DOM geladen");
-  listenToUI();
   listenToSocket();
 });
+// #endregion

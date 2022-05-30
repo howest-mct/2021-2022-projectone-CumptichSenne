@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <!-- Meta data -->
+    <!-- Version 2021 -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Senne Cumptich Project one</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" media="screen" href="style/reset.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="style/screen.css" />
+
+    <!-- Script -->
+    <script src="script/datahandler.js"></script>
+    <script src="script/app.js"></script>
+  </head>
+
+  <body class="js-homepage">
+    <div class="c-app">
+      <aside class="c-sidebar">
+        <h2 class="c-sidebar__maintitle">Smart pool</h2>
+        <h3 class="c-sidebar__subtitle">navigatie</h3>
+        <ul class="o-list c-sidebar-list">
+          <li class="c-sidebar-item"><button class="c-sidebar-button" onclick="window.location.href = 'http://192.168.168.169/index.html'">Historiek</button></li>
+          <li class="c-sidebar-item"><button class="c-sidebar-button" onclick="window.location.href = 'http://192.168.168.169/grafiek.html'">Grafiek</button></li>
+          <li class="c-sidebar-item"><button class="c-sidebar-button c-current-page" >Instellingen</button></li>
+        </ul>
+        <h3 class="c-sidebar__subtitle">Filters</h3>
+        <ul class="o-list c-sidebar-list js-destinations">
+          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="1">Sensoren</button></li>
+          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="2">Actuatoren</button></li>
+          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="3">Temperatuur sensor</button></li>
+          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="4">Water kwaliteit sensor</button></li>
+          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="5">Ph-sensor</button></li>
+        </ul>
+      </aside>
+    </div>
+  </body>
+</html>
