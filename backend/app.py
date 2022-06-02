@@ -1,5 +1,7 @@
 from crypt import methods
 from datetime import datetime
+from urllib.request import Request
+from wsgiref.util import request_uri
 from RPi import GPIO
 from helpers.display import LCD
 from helpers.mcp import MCP
@@ -7,16 +9,16 @@ import time
 import string
 import threading
 
-from flask_cors import CORS
 from flask_socketio import SocketIO, emit, send
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from repositories.DataRepository import DataRepository
 
 from selenium import webdriver
 
 lcd = LCD(0x20, 21, 20)
 var = MCP(0, 0)
-sensor_file_name = '/sys/bus/w1/devices/28-01205f3bba45/w1_slave'
+sensor_file_name = '/sys/bus/w1/devices/28-012062255871/w1_slave'
 
 #De te gebruiken instructies
 LCD_FunctieSet = 0b00111000
@@ -32,6 +34,13 @@ socketio = SocketIO(app, cors_allowed_origins="*", logger=False,
                     engineio_logger=False, ping_timeout=1)
 
 CORS(app)
+
+endpoint = '/api/v1'
+
+@app.route(endpoint + '/historiek/', methods=['GET'])
+def get_destinations():
+    if request.method == 'GET':
+        return jsonify(bestemmingen=DataRepository.read_history()), 200
 
 @socketio.on_error()        # Handles the default namespace
 def error_handler(e):
@@ -141,16 +150,3 @@ if __name__ == '__main__':
         print ('KeyboardInterrupt exception is caught')
     finally:
         GPIO.cleanup()
-
-endpoint = '/api/v1'
-
-# routes
-
-@app.route(endpoint + '/historiek/', methods=['GET'])
-def get_historiek():
-    if request.method == 'GET':
-        data = DataRepository.read_history()
-        if data is not None:
-            return jsonify(data), 200
-        else:
-            return jsonify(message="Error"), 404
