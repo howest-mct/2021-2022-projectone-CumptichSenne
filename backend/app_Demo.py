@@ -6,7 +6,7 @@ import threading
 
 from flask_cors import CORS
 from flask_socketio import SocketIO, emit, send
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from repositories.DataRepository import DataRepository
 
 from selenium import webdriver
@@ -48,6 +48,13 @@ socketio = SocketIO(app, cors_allowed_origins="*", logger=False,
                     engineio_logger=False, ping_timeout=1)
 
 CORS(app)
+
+endpoint = '/api/v1'
+
+@app.route(endpoint + '/bestemmingen/', methods=['GET'])
+def get_destinations():
+    if request.method == 'GET':
+        return jsonify(bestemmingen=DataRepository.read_bestemmingen()), 200
 
 
 @socketio.on_error()        # Handles the default namespace
