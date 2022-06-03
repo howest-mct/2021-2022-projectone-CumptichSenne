@@ -12,14 +12,14 @@
 /* Elements */
 body,
 html {
-  font: 16px / 1.5 -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  font-family: 'Degular';
   color: #222;
-  background-color: #5ca6d4;
+  background-color: #fff;
 }
 
 ::selection {
   color: #fff;
-  background: #5ca6d4;
+  background: #fff;
 }
 
 h1 {
@@ -67,19 +67,19 @@ h2 {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #fff;
+  background: #70B7FF;
   width: 80%;
 }
 
 .c-sidebar__maintitle {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 2.2rem;
 }
 
 .c-sidebar__title {
   margin: 0;
   font-size: 1.2rem;
-  color:rgb(87, 84, 84);
+  color:#454A4D;
 }
 
 .c-sidebar__subtitle {

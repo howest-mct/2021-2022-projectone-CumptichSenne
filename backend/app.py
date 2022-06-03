@@ -38,9 +38,14 @@ CORS(app)
 endpoint = '/api/v1'
 
 @app.route(endpoint + '/historiek/', methods=['GET'])
-def get_destinations():
+def get_historiek():
     if request.method == 'GET':
-        return jsonify(bestemmingen=DataRepository.read_history()), 200
+        return jsonify(historiek=DataRepository.read_history()), 200
+
+@app.route(endpoint + '/devices/', methods=['GET'])
+def get_devices():
+    if request.method == 'GET':
+        return jsonify(devices=DataRepository.read_devices()), 200
 
 @socketio.on_error()        # Handles the default namespace
 def error_handler(e):
