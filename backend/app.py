@@ -6,7 +6,6 @@ from RPi import GPIO
 from helpers.display import LCD
 from helpers.mcp import MCP
 import time
-import string
 import threading
 
 from flask_socketio import SocketIO, emit, send
@@ -18,7 +17,8 @@ from selenium import webdriver
 
 lcd = LCD(0x20, 21, 20)
 var = MCP(0, 0)
-sensor_file_name = '/sys/bus/w1/devices/28-012062255871/w1_slave'
+var2 = MCP(0, 0)
+sensor_file_name = '/sys/bus/w1/devices/28-01205f3bba45/w1_slave'
 
 #De te gebruiken instructies
 LCD_FunctieSet = 0b00111000
@@ -42,10 +42,50 @@ def get_historiek():
     if request.method == 'GET':
         return jsonify(historiek=DataRepository.read_history()), 200
 
+@app.route(endpoint + '/historiek/<DeviceID>/', methods=['GET'])
+def get_historiek_per_device(DeviceID):
+    if request.method == 'GET':
+        return jsonify(device=DataRepository.Read_history_per_device(DeviceID))
+
 @app.route(endpoint + '/devices/', methods=['GET'])
 def get_devices():
     if request.method == 'GET':
         return jsonify(devices=DataRepository.read_devices()), 200
+
+@app.route(endpoint + '/temperatuur/', methods=['GET'])
+def get_temperatuur_chart():
+    if request.method == 'GET':
+        return jsonify(temperatuur=DataRepository.read_temp_chart()), 200
+
+@app.route(endpoint + '/kwalitiet/', methods=['GET'])
+def get_kwaliteit_chart():
+    if request.method == 'GET':
+        return jsonify(kwaliteit=DataRepository.read_kwaliteit_chart()), 200
+
+@app.route(endpoint + '/ph/', methods=['GET'])
+def get_ph_chart():
+    if request.method == 'GET':
+        return jsonify(ph=DataRepository.read_ph_chart()), 200
+
+@app.route(endpoint + '/temp/radial/', methods=['GET'])
+def get_temp_radial():
+    if request.method == 'GET':
+        return jsonify(TempRadial=DataRepository.read_temp_radial()), 200
+
+@app.route(endpoint + '/kwaliteit/radial/', methods=['GET'])
+def get_kwaliteit_radial():
+    if request.method == 'GET':
+        return jsonify(KwaliteitRadial=DataRepository.read_kwaliteit_radial()), 200
+
+@app.route(endpoint + '/ph/radial/', methods=['GET'])
+def get_ph_radial():
+    if request.method == 'GET':
+        return jsonify(phRadial=DataRepository.read_ph_radial()), 200
+
+@app.route(endpoint + '/status/', methods=['GET'])
+def get_status():
+    if request.method == 'GET':
+        return jsonify(status=DataRepository.read_status()), 200
 
 @socketio.on_error()        # Handles the default namespace
 def error_handler(e):
@@ -79,8 +119,10 @@ def all_out():
                 if (positie > 0):
                     temp = round((float(line[positie+2:-1])/1000),2)
                     print(f"De temperatuur is: {temp:>8} °Celsius")
-            waarde = var.analog_to_waarde(var.read_channel(0b10000000))
-            print(waarde)
+            kwaliteit = var.analog_to_waarde(var.read_channel(0b10000000))
+            ph = round(var2.analog_to_waarde(var2.read_channel(0b10100010))/500/3.3*14,2)
+            print(f"De gemeten kwaliteit van het water is: {kwaliteit}")
+            print(f"De gemeten pH-waarde van het water is: {ph}")
         now = datetime.now()
         dt_string = now.strftime("%Y/%m/%d %H:%M:%S")
         if (temp > 40):
@@ -89,8 +131,21 @@ def all_out():
             status = 2
         else:
             status = 1
+        if (kwaliteit > 500):
+            status_kwaliteit = 3
+        elif(kwaliteit <= 500 and kwaliteit >= 100):
+            status_kwaliteit = 2
+        else:
+            status_kwaliteit = 1
+        if (ph > 9):
+            status_ph = 3
+        elif(ph <= 9 and ph >= 6):
+            status_ph = 2
+        else:
+            status_ph = 1
         DataRepository.create_waarde(dt_string,temp,"Gemeten temperatuur",1,3,status)
-        DataRepository.create_waarde(dt_string,waarde,"Gemeten kwaliteit waarde",2,3,2)
+        DataRepository.create_waarde(dt_string,kwaliteit,"Gemeten kwaliteit waarde",2,3,status_kwaliteit)
+        DataRepository.create_waarde(dt_string,ph,"Gemeten pH-waarde",3,3,status_ph)
         time.sleep(10) 
 
 def start_thread():
@@ -144,10 +199,9 @@ lcd.send_instruction(LCD_DisplayLegenTerugHome)
 
 
 if __name__ == '__main__':
-    app.run(debug=True) 
     try:
-        setup_gpio()
-        start_thread()
+        #setup_gpio()
+        #start_thread()
         start_chrome_thread()
         print("**** Starting APP ****")
         socketio.run(app, debug=False, host='0.0.0.0')

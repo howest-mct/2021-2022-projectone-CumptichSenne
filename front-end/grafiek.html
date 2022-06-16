@@ -15,28 +15,23 @@
     <!-- Script -->
     <script src="script/datahandler.js"></script>
     <script src="script/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   </head>
-
-  <body class="js-homepage">
+  <body class="js-grafiek-body">
     <div class="c-app">
-      <aside class="c-sidebar">
-        <h2 class="c-sidebar__maintitle">Smart pool</h2>
-        <h3 class="c-sidebar__subtitle">navigatie</h3>
-        <ul class="o-list c-sidebar-list">
-          <li class="c-sidebar-item"><button class="c-sidebar-button" onclick="window.location.href = 'http://192.168.168.169/index.html'">Home</button></li>
-          <li class="c-sidebar-item"><button class="c-sidebar-button" onclick="window.location.href = 'http://192.168.168.169/Historiek.html'">Historiek</button></li>
-          <li class="c-sidebar-item"><button class="c-sidebar-button c-current-page">Grafiek</button></li>
-          <li class="c-sidebar-item"><button class="c-sidebar-button" onclick="window.location.href = 'http://192.168.168.169/instellingen.html'">Instellingen</button></li>
-        </ul>
-        <h3 class="c-sidebar__subtitle">Filters</h3>
-        <ul class="o-list c-sidebar-list js-destinations">
-          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="1">Sensoren</button></li>
-          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="2">Actuatoren</button></li>
-          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="3">Temperatuur sensor</button></li>
-          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="4">Water kwaliteit sensor</button></li>
-          <li class="c-sidebar-item"><button class="c-sidebar-button js-station" data-destination-id="5">Ph-sensor</button></li>
-        </ul>
+      <aside class="topnav">
+        <a class="topnav-title" onclick="window.location.href = 'http://192.168.168.169/index.html'">Smart pool</a>
+          <div class="topnav-subtitle">
+            <a href="#home" class="active" onclick="window.location.href = 'http://192.168.168.169/grafiek.html'">Grafiek</a>
+            <a href="#home" class="active" onclick="window.location.href = 'http://192.168.168.169/beheren.html'">Beheren</a>
+          </div>          
       </aside>
+      <main class="c-content">
+        <h1 class="c-content__title">Grafiek</h1>
+        <div id="chart1" class="c-chart-grafiek js-chart1"></div>
+        <div id="chart2" class="c-chart-grafiek js-chart2"></div>
+        <div id="chart3" class="c-chart-grafiek js-chart3"></div>
+      </main>
     </div>
   </body>
 </html>
