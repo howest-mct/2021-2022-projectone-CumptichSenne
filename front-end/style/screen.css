@@ -1,8 +1,3 @@
-/* Settings */
-:root {
-  --sidebar-width: 280px;
-}
-
 /* Objects */
 .o-list {
   list-style: none;
@@ -34,46 +29,27 @@ h2 {
 }
 
 /* Components */
-.c-app {
-  display: grid;
-  min-height: 100vh;
-  grid-template-columns: var(--sidebar-width) 1fr;
+
+.c-sidebar{
+  position: relative;
+  overflow: hidden;
+  background-color: #70B7FF;
 }
 
-.c-logo {
-  display: flex;
-  justify-content: center;
-  padding: 1rem;
-  background: #0071b7;
-}
-
-.c-logo__symbol {
-  display: block;
-  height: 2.5rem;
-  fill: white;
-}
-
-.c-topbar {
-  padding: 0 2rem;
-  background: rgba(255, 255, 255, 1);
-  border-bottom: 1px solid #cfcfcf;
-  display: flex;
-  align-items: center;
-}
-
-.c-sidebar {
-  box-sizing: border-box;
-  padding: 2rem 1rem;
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
+.c-sidebar a {
+  float: left;
   background: #70B7FF;
-  width: 80%;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 20px;
 }
 
 .c-sidebar__maintitle {
   margin: 0;
-  font-size: 2.2rem;
+  align-items: center;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 .c-sidebar__title {
@@ -86,8 +62,8 @@ h2 {
   margin-bottom: 0;
   margin-top: 3rem;
   text-transform: uppercase;
-  font-size: 0.8rem;
-  color: #aaa;
+  font-size: 24px;
+  color: #454A4D;
 }
 
 .c-sidebar-item {
@@ -100,6 +76,73 @@ h2 {
   font-weight: 500;
   will-change: opacity;
   cursor: pointer;
+  color: #1A1B1C;
+  font-size: 20px;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #70B7FF;
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  z-index: 1;
+}
+
+.topnav-title {
+  float: left;
+  color: #454A4D;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 42px;
+  font-weight: bold;
+  display: block;
+  position: fixed;
+}
+
+.topnav-subtitle {
+  float: center;
+  color: #454A4D;
+  display: flex;
+  margin: auto auto;
+  justify-content: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight:500;
+}
+
+.topnav a {
+  float: left;
+  color: #454A4D;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.topnav-centered a {
+  float: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.topnav-right {
+  float: right;
+}
+
+@media screen and (max-width: 700px) {
+  .topnav {
+    position: relative;
+  }
+
+  .topnav a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
 }
 
 .c-current-page {
@@ -111,21 +154,45 @@ h2 {
 }
 
 .c-content {
-  box-sizing: border-box;
-  height: calc(100vh - 72px);
   padding: 2rem;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-top: 50px;
+  position: relative;
+}
+
+.c-content-beheren {
+
+  padding: 2rem;
+  overflow-y: auto;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+  overflow-x: hidden;
+  margin-top: 50px;
 }
 
 .c-content__title {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 64px;
+  text-align: center;
 }
 
-.c-traject {
+.c-traject,
+.c-sensoren {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 70px 70px 70px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  padding-top: 1rem;
+  align-items: center;
+  outline: none;
+}
+
+.c-traject-historiek,
+.c-sensoren-historiek {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 1.5rem;
   margin: 1rem 0;
   padding-top: 1rem;
@@ -143,6 +210,12 @@ h2 {
   font-size: 0.8rem;
 }
 
+.c-app {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: var(--sidebar-width) 1fr;
+}
+
 .c-historiek__id,
 .c-datum,
 .c-waarde,
@@ -158,8 +231,8 @@ h2 {
 .c-actie-waarde,
 .c-status-waarde{
   display: flex;
-  justify-content: center;
-  text-align: center;
+  justify-content: left;
+  text-align: left;
 }
 
 .c-form__item label {
@@ -192,8 +265,87 @@ h2 {
   background-color: #1796e6;
 }
 
-#mapid {
-  margin-top: 1em;
-  height: 50vh;
+.c-container {
+  position: fixed;
+  display:flex;
+  justify-content:center;
+}
+
+.c-container-index {
+  display: flex;
   width: 100%;
+  height: 200px;
+}
+
+.c-chart {
+  width: 33%;
+  margin-top: 12%;
+}
+
+.c-chart-grafiek {
+  margin-top: 5%;
+  display:flex;
+  justify-content: center;
+}
+/* -----
+SVG Icons - svgicons.sparkk.fr
+----- */
+
+.c-icon,
+.c-beherenid-waarde,
+.c-beherensensor__id,
+.c-historiekid-waarde,
+.c-historiek__id {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.svg-icon-deactivate {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.svg-icon-deactivate path,
+.svg-icon-deactivate polygon,
+.svg-icon-deactivate rect {
+  fill: rgb(207, 115, 115);
+}
+
+.svg-icon-deactivate circle {
+  stroke: #222;
+  stroke-width: 2;
+}
+
+.svg-icon-activate {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.svg-icon-activate path,
+.svg-icon-activate polygon,
+.svg-icon-activate rect {
+  fill: rgb(83, 184, 108);
+}
+
+.svg-icon-activate circle {
+  stroke: #222;
+  stroke-width: 2;
+}
+
+.svg-icon-uitgegrijsd {
+  width: 2.5em;
+  height: 2.5em;
+}
+
+.svg-icon-uitgegrijsd path,
+.svg-icon-uitgegrijsd polygon,
+.svg-icon-uitgegrijsd rect {
+  fill: rgb(177, 177, 177);
+}
+
+.svg-icon-uitgegrijsd circle {
+  stroke: #222;
+  stroke-width: 2;
 }

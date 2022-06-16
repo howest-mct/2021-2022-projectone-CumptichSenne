@@ -11,6 +11,10 @@ class MCP:
     def analog_to_waarde(waarde):
         return waarde
     
+    @staticmethod
+    def analog_to_ph(waarde):
+        return waarde
+    
     def read_channel(self,channel):
         byte_out = [0b1, channel, 0x00]
         byte_in = self.spi.xfer(byte_out)
