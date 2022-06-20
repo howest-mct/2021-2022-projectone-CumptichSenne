@@ -13,27 +13,27 @@
     <link rel="stylesheet" type="text/css" media="screen" href="style/screen.css" />
 
     <!-- Script -->
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js" integrity="sha384-LzhRnpGmQP+lOvWruF/lgkcqD+WDVt9fU3H4BWmwP5u5LTmkUGafMcpZKNObVMLU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="script/datahandler.js"></script>
     <script src="script/app.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js" integrity="sha384-LzhRnpGmQP+lOvWruF/lgkcqD+WDVt9fU3H4BWmwP5u5LTmkUGafMcpZKNObVMLU" crossorigin="anonymous"></script>
   </head>
 
   <body class="js-index-body">
     <div class="c-app">
-      <aside class="topnav">
-        <a class="topnav-title" onclick="window.location.href = 'http://192.168.168.169/index.html'">Smart pool</a>
-          <div class="topnav-subtitle">
-            <a href="#home" onclick="window.location.href = 'http://192.168.168.169/grafiek.html'">Grafiek</a>
-            <a href="#home" onclick="window.location.href = 'http://192.168.168.169/beheren.html'">Beheren</a>
-          </div>          
-      </aside>
+      <div class="topnav" id="myTopnav">
+        <a class="topnav-title" onclick="location.href = 'index.html'">Smart pool</a>
+        <div class="topnav-subtitle">
+          <a class="topnav-subtitle" onclick="location.href = 'grafiek.html'">Grafiek</a>
+          <a class="topnav-subtitle" onclick="location.href = 'beheren.html'">Beheren</a>
+        </div>
+      </div>
       <main class="c-content">
         <h1 class="c-content__title">Homescreen</h1>
         <div class="c-container-index">
-          <div id="chart1" class="c-chart js-chart1"></div>
-          <div id="chart2" class="c-chart js-chart2"></div>
-          <div id="chart3" class="c-chart js-chart3"></div>
+          <div id="charttemp" class="c-chart js-charttemp"></div>
+          <div id="chartkwal" class="c-chart js-chart2"></div>
+          <div id="chartph" class="c-chart js-chart3"></div>
         </div>
       </main>
     </div>
