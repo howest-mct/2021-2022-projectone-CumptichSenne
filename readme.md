@@ -1,7 +1,5 @@
 # Project One - Smart pool
 
-Zoals je kan zien is er geen "vaste" structuur voor zo'n document. Je bepaalt zelf hoe je het bestand via markdown structureert. Zorg ervoor dat het document minimaal op volgende vragen een antwoord biedt.
-
 The program is built in 4 different languages. The frontend uses HTML, CSS and Javascript. The bakend Uses Python
 
 To install the database you have to download MySQL Workbench (link: https://dev.mysql.com/downloads/windows/installer/8.0.html). Choose the bottom one of the two. After you have succesfully installed Workbench you can download the Database file (CumptichSenne_Database.sql). Open this file in Workbench and run it. The database will be installed with a bunch of test data to make sure that it works.
