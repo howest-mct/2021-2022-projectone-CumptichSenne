@@ -224,7 +224,7 @@ def all_out():
         socketio.emit('B2F_kwaliteit_chart', {'kwaliteit': kwaliteit_chart})
         ph_chart = DataRepository.read_ph_chart()
         socketio.emit('B2F_ph_chart', {'ph': ph_chart})
-        time.sleep(10) 
+        time.sleep(60) 
 
 def start_thread():
     print("**** Starting THREAD ****")
