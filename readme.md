@@ -1,25 +1,16 @@
-# Project One - Name of the project
+# Project One - Smart pool
 
-**De inhoud van dit document schrijf je volledig in het Engels**
-
-Omschrijf het project. Doe dit in het markdown formaat.
-- [Syntax md](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
-
-Hoe kan een externe persoon (die niets weet over de "ProjectOne" opdracht) het project snel runnen op de eigen pc?
-Op github vind je verschillende voorbeelden hoe je een readme.md bestand kan structureren.
-- [Voorbeeld 1](https://github.com/othneildrew/Best-README-Template)
-- [Voorbeeld 2](https://github.com/tsungtwu/flask-example/blob/master/README.md)
-- [Voorbeeld 3](https://github.com/twbs/bootstrap/blob/main/README.md)
-- [Voorbeeld 4](https://www.makeareadme.com/)
-
-## Inhoud
 Zoals je kan zien is er geen "vaste" structuur voor zo'n document. Je bepaalt zelf hoe je het bestand via markdown structureert. Zorg ervoor dat het document minimaal op volgende vragen een antwoord biedt.
 
-- Wat is de structuur van het project?
-- Wat moet er gebeuren met de database? Hoe krijgt de persoon dit up and running?
-- Moeten er settings worden veranderd in de backend code voor de database? 
-- Runt de back- en front-end code direct? Of moeten er nog commando's worden ingegeven?
-- Zijn er poorten die extra aandacht vereisen in de back- en/of front-end code?
+The program is built in 4 different languages. The frontend uses HTML, CSS and Javascript. The bakend Uses Python
+
+To install the database you have to download MySQL Workbench (link: https://dev.mysql.com/downloads/windows/installer/8.0.html). Choose the bottom one of the two. After you have succesfully installed Workbench you can download the Database file (CumptichSenne_Database.sql). Open this file in Workbench and run it. The database will be installed with a bunch of test data to make sure that it works.
+
+To start the program you have to download Visual Studio Code and you have to open a remote connection. Make sure your Raspberry Pi is plugged in with a Ethernet cable. After you openend the connection, you have to enter a password that is (W8w00rd) after you entered the password you have to open a terminal and type the following command: sudo systemctl start mijnproject.service. This will start the program.
+
+To make sure that you have access to the database is it necesarry that you open the config.py file and change the settings to your personal settings of your new MySQL account.
+
+After starting the program will the sensors automaticaly start measuring values and put them in your database.
   
 ## Instructables
-Plaats zeker een link naar de Instructables zodat het project kan nagebouwd worden!
+https://www.instructables.com/Smart-Pool/
